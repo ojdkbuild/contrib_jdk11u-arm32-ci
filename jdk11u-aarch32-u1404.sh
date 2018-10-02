@@ -67,7 +67,7 @@ done
 $D ln -s /opt/sysroot/lib/arm-linux-gnueabihf /lib/arm-linux-gnueabihf
 
 # boot jdk
-$D wget -nv https://github.com/ojdkbuild/contrib_jdk11u-ci/releases/download/jdk-11.0.0%2B28/jdk-11.0.0-ojdkbuild-linux-x64.zip
+$D wget -nv https://github.com/ojdkbuild/contrib_jdk11u-ci/releases/download/jdk-11%2B28/jdk-11.0.0-ojdkbuild-linux-x64.zip
 $D unzip -q jdk-11.0.0-ojdkbuild-linux-x64.zip
 $D mv jdk-11.0.0-ojdkbuild-linux-x64 bootjdk
 
