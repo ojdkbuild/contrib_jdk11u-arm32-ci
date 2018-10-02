@@ -42,7 +42,7 @@ sudo docker run \
 # dependencies
 $D apt update
 $D apt install -y \
-    autoconf
+    autoconf \
     gcc \
     g++ \
     gcc-arm-linux-gnueabihf \
