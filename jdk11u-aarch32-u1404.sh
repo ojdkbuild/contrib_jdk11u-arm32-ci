@@ -91,6 +91,7 @@ $D bash -c "cd jdkbuild && \
     --enable-unlimited-crypto=yes \
     --disable-warnings-as-errors \
     --disable-hotspot-gtest \
+    --with-abi-profile=arm-vfp-hflt \
     --with-native-debug-symbols=${OJDK_WITH_NATIVE_DEBUG_SYMBOLS} \
     --with-debug-level=${OJDK_WITH_DEBUG_LEVEL} \
     --with-stdc++lib=static \
