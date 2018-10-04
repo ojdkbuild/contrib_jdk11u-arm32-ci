@@ -5,7 +5,7 @@ OpenJDK 11 AArch32 builds
 
 OpenJDK 11 AArch32 builds done on Travis CI - [downloads](https://github.com/ojdkbuild/contrib_jdk11u-aarch32-ci/releases).
 
-Builds are done using cross-compiling in Ubuntu 14.04 containers for better compatibility with older Linux distributions.
+Builds are done using cross-compiling in Ubuntu 14.06 container.
 
 License information
 -------------------

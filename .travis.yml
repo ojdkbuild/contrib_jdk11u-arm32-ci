@@ -31,7 +31,7 @@ script:
   - export OJDK_BUILD=`echo ${OJDK_TAG} | sed 's/+/ /' | awk '{print $2}'`
   - export OJDK_MILESTONE=ojdkbuild
   - export OJDK_IMAGE=jdk-11.0.${OJDK_UPDATE}-${OJDK_MILESTONE}-linux-armhf
-  - ./jdk11u-aarch32-u1404.sh ${OJDK_TAG}
+  - ./jdk11u-aarch32-u1604.sh ${OJDK_TAG}
 
 deploy:
   provider: releases

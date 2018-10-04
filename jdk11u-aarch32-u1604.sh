@@ -27,16 +27,16 @@ export OJDK_TAG="$1"
 export OJDK_WITH_NATIVE_DEBUG_SYMBOLS=none
 export OJDK_WITH_DEBUG_LEVEL=release
 export OJDK_CACERTS_URL=https://github.com/ojdkbuild/lookaside_ca-certificates/raw/master/cacerts
-export D="docker exec builder"
+export D="sudo docker exec builder"
 
 # docker
-sudo docker pull ubuntu:trusty
+sudo docker pull ubuntu:xenial
 sudo docker run \
     -id \
     --name builder \
     -w /opt \
     -v `pwd`:/host \
-    ubuntu:trusty \
+    ubuntu:xenial \
     bash
 
 # dependencies
@@ -50,6 +50,8 @@ $D apt install -y \
     make \
     zip \
     unzip \
+    bzip2 \
+    file \
     debootstrap \
     qemu-user-static
 
@@ -91,22 +93,19 @@ $D bash -c "cd jdkbuild && \
     --enable-unlimited-crypto=yes \
     --disable-warnings-as-errors \
     --disable-hotspot-gtest \
-    --with-abi-profile=arm-vfp-hflt \
     --with-native-debug-symbols=${OJDK_WITH_NATIVE_DEBUG_SYMBOLS} \
     --with-debug-level=${OJDK_WITH_DEBUG_LEVEL} \
     --with-stdc++lib=static \
+    --with-zlib=bundled \
     --with-boot-jdk=/opt/bootjdk/ \
     --with-build-jdk=/opt/bootjdk/ \
     --with-cacerts-file=/opt/cacerts \
     --with-freetype-include=/opt/sysroot/usr/include/freetype2/ \
     --with-freetype-lib=/opt/sysroot/usr/lib/arm-linux-gnueabihf/ \
     --with-version-pre=${OJDK_MILESTONE} \
-    --with-version-security=${OJDK_UPDATE} \
     --with-version-build=${OJDK_BUILD} \
     --with-version-opt='' \
-    --with-log=info \
-    --with-extra-cflags='-I/opt/sysroot/usr/include/c++/4.8 -I/opt/sysroot/usr/include/arm-linux-gnueabihf/c++/4.8' \
-    --with-extra-cxxflags='-I/opt/sysroot/usr/include/c++/4.8 -I/opt/sysroot/usr/include/arm-linux-gnueabihf/c++/4.8'"
+    --with-log=info"
 $D bash -c "cd jdkbuild && \
     make images"
 
