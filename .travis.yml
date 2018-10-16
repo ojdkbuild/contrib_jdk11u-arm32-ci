@@ -26,9 +26,10 @@ script:
   - set -e
   - export OJDK_TAG=`git describe --exact-match --tags HEAD`
   - if [ -z ${OJDK_TAG} ] ; then exit 1 ; fi
-  #- export OJDK_UPDATE=`echo ${OJDK_TAG} | sed 's/\./ /g' | sed 's/+/ /' | awk '{print $3}'`
-  - export OJDK_UPDATE=0
+  - export OJDK_UPDATE=`echo ${OJDK_TAG} | sed 's/\./ /g' | sed 's/+/ /' | awk '{print $3}'`
+  - echo ${OJDK_UPDATE}
   - export OJDK_BUILD=`echo ${OJDK_TAG} | sed 's/+/ /' | awk '{print $2}'`
+  - echo ${OJDK_BUILD}
   - export OJDK_MILESTONE=ojdkbuild
   - export OJDK_IMAGE=jdk-11.0.${OJDK_UPDATE}-${OJDK_MILESTONE}-linux-armhf
   - ./jdk11u-aarch32-u1604.sh ${OJDK_TAG}

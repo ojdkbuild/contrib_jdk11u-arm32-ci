@@ -69,9 +69,9 @@ done
 $D ln -s /opt/sysroot/lib/arm-linux-gnueabihf /lib/arm-linux-gnueabihf
 
 # boot jdk
-$D wget -nv https://github.com/ojdkbuild/contrib_jdk11u-ci/releases/download/jdk-11%2B28/jdk-11.0.0-ojdkbuild-linux-x64.zip
-$D unzip -q jdk-11.0.0-ojdkbuild-linux-x64.zip
-$D mv jdk-11.0.0-ojdkbuild-linux-x64 bootjdk
+$D wget -nv https://github.com/ojdkbuild/contrib_jdk11u-ci/releases/download/jdk-11.0.${OJDK_UPDATE}%2B${OJDK_BUILD}/jdk-11.0.${OJDK_UPDATE}-ojdkbuild-linux-x64.zip
+$D unzip -q jdk-11.0.${OJDK_UPDATE}-ojdkbuild-linux-x64.zip
+$D mv jdk-11.0.${OJDK_UPDATE}-ojdkbuild-linux-x64 bootjdk
 
 # cacerts
 $D wget -nv ${OJDK_CACERTS_URL} -O cacerts
