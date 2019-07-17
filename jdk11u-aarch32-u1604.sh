@@ -59,7 +59,7 @@ $D apt install -y \
 $D qemu-debootstrap \
     --arch=armhf \
     --verbose \
-    --include=fakeroot,build-essential,libx11-dev,libxext-dev,libxrender-dev,libxtst-dev,libxt-dev,libcups2-dev,libfontconfig1-dev,libasound2-dev,libfreetype6-dev \
+    --include=fakeroot,build-essential,libx11-dev,libxext-dev,libxrandr-dev,libxrender-dev,libxtst-dev,libxt-dev,libcups2-dev,libfontconfig1-dev,libasound2-dev,libfreetype6-dev \
     --resolve-deps trusty \
     /opt/chroot \
     || true

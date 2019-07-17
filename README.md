@@ -1,7 +1,7 @@
 OpenJDK 11 AArch32 builds
 =========================
 
-[![travis](https://travis-ci.org/ojdkbuild/contrib_jdk11u-aarch32-ci.svg?branch=jdk-11.0.3%2B7)](https://travis-ci.org/ojdkbuild/contrib_jdk11u-aarch32-ci/builds)
+[![travis](https://travis-ci.org/ojdkbuild/contrib_jdk11u-aarch32-ci.svg?branch=jdk-11.0.4%2B11)](https://travis-ci.org/ojdkbuild/contrib_jdk11u-aarch32-ci/builds)
 
 OpenJDK 11 AArch32 builds done on Travis CI - [downloads](https://github.com/ojdkbuild/contrib_jdk11u-aarch32-ci/releases).
 
