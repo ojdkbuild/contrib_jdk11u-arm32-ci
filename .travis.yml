@@ -32,7 +32,7 @@ script:
   - echo ${OJDK_BUILD}
   - export OJDK_MILESTONE=ojdkbuild
   - export OJDK_IMAGE=jdk-11.0.${OJDK_UPDATE}-${OJDK_MILESTONE}-linux-armhf
-  - ./jdk11u-aarch32-u1604.sh ${OJDK_TAG}
+  - ./jdk11u-arm32-u1604.sh ${OJDK_TAG}
 
 deploy:
   provider: releases
@@ -43,7 +43,7 @@ deploy:
     - ${OJDK_IMAGE}.zip
     - ${OJDK_IMAGE}.zip.sha256
   on:
-    repo: ojdkbuild/contrib_jdk11u-aarch32-ci
+    repo: ojdkbuild/contrib_jdk11u-arm32-ci
     tags: true
 
 notifications:
