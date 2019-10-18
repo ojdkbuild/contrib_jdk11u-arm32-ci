@@ -102,9 +102,10 @@ $D bash -c "cd jdkbuild && \
     --with-cacerts-file=/opt/cacerts \
     --with-freetype-include=/opt/sysroot/usr/include/freetype2/ \
     --with-freetype-lib=/opt/sysroot/usr/lib/arm-linux-gnueabihf/ \
-    --with-version-pre=${OJDK_MILESTONE} \
+    --with-version-pre='' \
     --with-version-build=${OJDK_BUILD} \
-    --with-version-opt='' \
+    --with-version-opt='LTS' \
+    --with-vendor-version-string=18.9 \
     --with-log=info"
 $D bash -c "cd jdkbuild && \
     make images"
