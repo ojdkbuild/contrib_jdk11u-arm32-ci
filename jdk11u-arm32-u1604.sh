@@ -106,6 +106,10 @@ $D bash -c "cd jdkbuild && \
     --with-version-build=${OJDK_BUILD} \
     --with-version-opt='LTS' \
     --with-vendor-version-string=18.9 \
+    --with-vendor-name=ojdkbuild \
+    --with-vendor-url=https://github.com/ojdkbuild \
+    --with-vendor-bug-url=https://github.com/ojdkbuild/ojdkbuild/issues \
+    --with-vendor-vm-bug-url=https://github.com/ojdkbuild/ojdkbuild/issues \
     --with-log=info"
 $D bash -c "cd jdkbuild && \
     make images"
