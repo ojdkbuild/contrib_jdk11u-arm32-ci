@@ -31,7 +31,7 @@ task:
     echo ${OJDK_UPDATE}
     export OJDK_BUILD=`echo ${OJDK_TAG} | sed 's/+/ /' | awk '{print $2}'`
     echo ${OJDK_BUILD}
-    export OJDK_IMAGE=jdk-11.0.${OJDK_UPDATE}-ojdkbuild-linux-arm32
+    export OJDK_IMAGE=jdk-11.0.${OJDK_UPDATE}-ojdkbuild-linux-armhf
     # sources
     curl -LO http://hg.openjdk.java.net/jdk-updates/jdk11u/archive/${OJDK_TAG}.tar.bz2
     tar -xjf ${OJDK_TAG}.tar.bz2
@@ -74,4 +74,4 @@ task:
     # deploy
     cd /build && curl -LO https://github.com/tcnksm/ghr/releases/download/v0.13.0/ghr_v0.13.0_linux_amd64.tar.gz
     cd /build && tar -xzf ghr_v0.13.0_linux_amd64.tar.gz
-    /build/ghr_v0.13.0_linux_amd64/ghr -t ${GITHUB_TOKEN} -u ojdkbuild -r contrib_jdk11u-ci -c ${CIRRUS_CHANGE_IN_REPO} ${CIRRUS_TAG} /build/dist
+    /build/ghr_v0.13.0_linux_amd64/ghr -t ${GITHUB_TOKEN} -u ojdkbuild -r contrib_jdk11u-arm32-ci -c ${CIRRUS_CHANGE_IN_REPO} ${CIRRUS_TAG} /build/dist
