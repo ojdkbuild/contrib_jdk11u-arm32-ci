@@ -38,7 +38,7 @@ task:
     rm ${OJDK_TAG}.tar.bz2
     mv jdk11u-${OJDK_TAG} /jdk11u
     # bootjdk
-    curl -LO https://github.com/ojdkbuild/contrib_jdk11u-ci/releases/download/jdk-11.0.${OJDK_UPDATE}.1%2B${OJDK_BUILD}/jdk-11.0.${OJDK_UPDATE}-ojdkbuild-linux-x64.zip
+    curl -LO https://github.com/ojdkbuild/contrib_jdk11u-ci/releases/download/jdk-11.0.${OJDK_UPDATE}%2B${OJDK_BUILD}/jdk-11.0.${OJDK_UPDATE}-ojdkbuild-linux-x64.zip
     unzip -q jdk-11.0.${OJDK_UPDATE}-ojdkbuild-linux-x64.zip
     mv jdk-11.0.${OJDK_UPDATE}-ojdkbuild-linux-x64 /bootjdk
     # build
