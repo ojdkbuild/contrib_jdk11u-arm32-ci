@@ -21,7 +21,7 @@ task:
       memory: 4G
 
   environment:
-    GITHUB_TOKEN: ENCRYPTED[290c8060da18eef43892b5d22502c547d7e27c6be2601783407e793547f003bfaa0da5923e28adc634a8abfc81c85834]
+    GITHUB_TOKEN: ENCRYPTED[4e32bad1f6dc4dcfec265113dc98e20de34e8793b3ca2d348ea3f9d3e1248b97b1b1223356b705692733a8389ed4a0da]
 
   script: |
     export OJDK_TAG=`git describe --exact-match --tags HEAD`
@@ -49,6 +49,7 @@ task:
             --enable-unlimited-crypto=yes \
             --disable-warnings-as-errors \
             --disable-hotspot-gtest \
+            --disable-sjavac \
             --with-native-debug-symbols=none \
             --with-debug-level=release \
             --with-stdc++lib=static \
