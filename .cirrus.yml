@@ -1,0 +1,76 @@
+# Copyright 2021, akashche at redhat.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+task:
+  matrix:
+    container:
+      image: ojdkbuild/ubuntu-xenial-arm32
+      cpu: 2
+      memory: 4G
+
+  environment:
+    GITHUB_TOKEN: ENCRYPTED[290c8060da18eef43892b5d22502c547d7e27c6be2601783407e793547f003bfaa0da5923e28adc634a8abfc81c85834]
+
+  script: |
+    export OJDK_TAG=`git describe --exact-match --tags HEAD`
+    if [ -z ${OJDK_TAG} ] ; then exit 1 ; fi
+    echo ${OJDK_TAG}
+    export OJDK_UPDATE=`echo ${OJDK_TAG} | sed 's/\./ /g' | sed 's/+/ /' | awk '{print $3}'`
+    echo ${OJDK_UPDATE}
+    export OJDK_BUILD=`echo ${OJDK_TAG} | sed 's/+/ /' | awk '{print $2}'`
+    echo ${OJDK_BUILD}
+    export OJDK_IMAGE=jdk-11.0.${OJDK_UPDATE}-ojdkbuild-linux-arm32
+    # sources
+    curl -LO http://hg.openjdk.java.net/jdk-updates/jdk11u/archive/${OJDK_TAG}.tar.bz2
+    tar -xjf ${OJDK_TAG}.tar.bz2
+    rm ${OJDK_TAG}.tar.bz2
+    mv jdk11u-${OJDK_TAG} /jdk11u
+    # bootjdk
+    curl -LO https://github.com/ojdkbuild/contrib_jdk11u-ci/releases/download/jdk-11.0.${OJDK_UPDATE}.1%2B${OJDK_BUILD}/jdk-11.0.${OJDK_UPDATE}-ojdkbuild-linux-x64.zip
+    unzip -q jdk-11.0.${OJDK_UPDATE}-ojdkbuild-linux-x64.zip
+    mv jdk-11.0.${OJDK_UPDATE}-ojdkbuild-linux-x64 /bootjdk
+    # build
+    mkdir /build
+    cd /build && bash /jdk11u/configure \
+            --openjdk-target=arm-linux-gnueabihf \
+            --with-jvm-variants=server \
+            --enable-unlimited-crypto=yes \
+            --disable-warnings-as-errors \
+            --disable-hotspot-gtest \
+            --with-native-debug-symbols=none \
+            --with-debug-level=release \
+            --with-stdc++lib=static \
+            --with-zlib=bundled \
+            --with-boot-jdk=/bootjdk/ \
+            --with-build-jdk=/bootjdk/ \
+            --with-version-pre='' \
+            --with-version-build=${OJDK_BUILD} \
+            --with-version-opt='LTS' \
+            --with-vendor-version-string=18.9 \
+            --with-vendor-name=ojdkbuild \
+            --with-vendor-url=https://github.com/ojdkbuild \
+            --with-vendor-bug-url=https://github.com/ojdkbuild/ojdkbuild/issues \
+            --with-vendor-vm-bug-url=https://github.com/ojdkbuild/ojdkbuild/issues \
+            --with-num-cores=1
+    cd /build && make images LOG=info
+    mv /build/images/jdk /build/${OJDK_IMAGE}
+    cd /build && zip -qyr9 ${OJDK_IMAGE}.zip ${OJDK_IMAGE}
+    mkdir /build/dist
+    mv /build/${OJDK_IMAGE}.zip /build/dist/${OJDK_IMAGE}.zip
+    cd /build/dist && sha256sum ${OJDK_IMAGE}.zip > ${OJDK_IMAGE}.zip.sha256
+    # deploy
+    cd /build && curl -LO https://github.com/tcnksm/ghr/releases/download/v0.13.0/ghr_v0.13.0_linux_amd64.tar.gz
+    cd /build && tar -xzf ghr_v0.13.0_linux_amd64.tar.gz
+    /build/ghr_v0.13.0_linux_amd64/ghr -t ${GITHUB_TOKEN} -u ojdkbuild -r contrib_jdk11u-ci -c ${CIRRUS_CHANGE_IN_REPO} ${CIRRUS_TAG} /build/dist
