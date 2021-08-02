@@ -1,7 +1,7 @@
 OpenJDK 11 ARM32 builds
 =======================
 
-[![cirrus](https://api.cirrus-ci.com/github/ojdkbuild/contrib_jdk11u-arm32-ci.svg?branch=jdk-11.0.11%2B9)](https://cirrus-ci.com/github/ojdkbuild/contrib_jdk11u-arm32-ci)
+[![cirrus](https://api.cirrus-ci.com/github/ojdkbuild/contrib_jdk11u-arm32-ci.svg?branch=jdk-11.0.12%2B7)](https://cirrus-ci.com/github/ojdkbuild/contrib_jdk11u-arm32-ci)
 
 OpenJDK 11 ARM32 builds done on [Cirrus CI](https://cirrus-ci.org/) - [downloads](https://github.com/ojdkbuild/contrib_jdk11u-arm32-ci/releases).
 
